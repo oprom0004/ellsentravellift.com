@@ -1,0 +1,6 @@
+{
+  "name": "eTommens 800V DC Power Supply Hub",
+  "description": "Premium engineering portal for eTommens eTM 800V DC industrial, rackmount, programmable, and laboratory power supplies, with current specs from 1A to 6A.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
