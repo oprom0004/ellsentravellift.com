@@ -34,7 +34,7 @@ Engineers require automated test sequences (such as battery charge/discharge cyc
 With 800V circuits, resistance in the output leads can lead to voltage drops. Remote sensing bypasses this by measuring the voltage directly at the load terminals, ensuring the output voltage remains exactly at the programmed setpoint (e.g., exactly 800.00 V) regardless of cable length.
 
 ### 3. Low Ripple and Noise
-Delicate components like EV motor controllers or solar inverters require clean DC power. High-end programmable DC power supplies feature low ripple coefficients (typically $\le 0.01\%$ drift) to prevent electromagnetic interference (EMI) from skewing test results.
+Delicate components like EV motor controllers or solar inverters require clean DC power. High-end [variable DC power supplies](https://variabledcpowersupply.com/) feature low ripple coefficients (typically $\le 0.01\%$ drift) to prevent electromagnetic interference (EMI) from skewing test results.
 
 ### 4. Robust Safety Protection Mechanisms
 Handling 800 volts poses significant electrical hazards. Quality power systems are built with five layers of hardware protection:
