@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ellsentravellift.com"),
-  title: "800V DC Variable Programmable Power Supplies | eTommens ETM Series",
+  title: "800V DC Power Supply | eTommens High Voltage Variable Programmable Series",
   description: "Discover high-precision 800V DC power supplies by eTommens. Ideal for high-voltage laboratories, EV testbeds, aerospace automation, and rack integrations.",
 };
 
