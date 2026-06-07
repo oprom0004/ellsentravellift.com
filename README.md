@@ -67,4 +67,8 @@ High-voltage capacitors, aerospace insulation, and semiconductor testing require
 For engineering procurement, bulk orders, and custom voltage/current combinations (e.g., customized rack integration), explore the full range of options:
 
 *   **Official Catalog**: View pricing and model configurations on the [800V DC Power Supplies Category Page](https://variabledcpowersupply.com/800v-dc-power-supplies/).
+*   **Specific Models & Specifications**:
+    *   [eTM-8003C (800V 3A 2.4kW)](https://variabledcpowersupply.com/etm-8003c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-3a-with-5-powerful-protections-output-switch-control-low-noise/)
+    *   [eTM-8005C (800V 5A 4.0kW)](https://variabledcpowersupply.com/etm-8005c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-5a-with-5-powerful-protections-output-switch-control-low-noise/)
+    *   [eTM-8006C (800V 6A 4.8kW)](https://variabledcpowersupply.com/etm-8006c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-6a-with-5-powerful-protections-output-switch-control-low-noise/)
 *   **Technical Assistance & RFQs**: Contact authorized distribution integrators directly via email at `contact@variabledcpowersupply.com` for official proforma invoices, lead times, and custom specifications.
