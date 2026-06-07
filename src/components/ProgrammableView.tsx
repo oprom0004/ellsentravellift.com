@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
+import Link from "next/link";
 import { 
   Terminal, 
   Cpu, 
@@ -12,24 +15,17 @@ import {
   Copy, 
   Check, 
   ShoppingCart, 
-  FileText, 
   FlaskConical, 
   BatteryCharging, 
   Sun, 
   Activity, 
   Zap, 
   ExternalLink,
-  ShieldCheck,
   Package
 } from "lucide-react";
-import { AppRoute } from "../types";
 import { POWER_MODELS } from "../data";
 
-interface ProgrammableProps {
-  onNavigate?: (route: AppRoute) => void;
-}
-
-export default function ProgrammableView({ onNavigate }: ProgrammableProps) {
+export default function ProgrammableView() {
   const [terminalInput, setTerminalInput] = useState<string>("");
   const [terminalLogs, setTerminalLogs] = useState<Array<{ type: "cmd" | "resp" | "sys"; text: string }>>([
     { type: "sys", text: "eTommens Programmable eTM SCPI Terminal v3.14 initialized." },
@@ -152,11 +148,11 @@ ser.close()
           <Terminal size={13} className="text-yellow-500" />
           <span className="text-xs font-mono font-medium text-yellow-500 uppercase tracking-wider font-semibold">Automated Lab Sequences</span>
         </div>
-        <h1 className="text-3xl font-sans font-bold text-gray-100 tracking-tight">
+        <h1 className="text-3xl font-sans font-bold text-gray-100 tracking-tight font-sans">
           Programmable 800V DC Power Supply Control & Procurement
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          Designed specifically for automated testing and advanced diagnostic systems, the eTommens eTM 800V series integrates robust programming. Automate complex voltage profiles, simulate dynamic battery behaviors, and script device burn-in runs over stable <span className="text-gray-200">RS232/485 serial interfaces, standard Ethernet links, USB COM ports,</span> or optional <span className="text-gray-200">IEEE-488 GPIB interfaces</span> using industry-standard SCPI syntax.
+          Designed specifically for automated testing and advanced diagnostic systems, the eTommens eTM 800V series integrates robust programming. When configuring a <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">programmable 800V DC power supply</a> for automated test systems, engineers can automate complex voltage profiles, simulate dynamic battery behaviors, and script device burn-in runs over stable <span className="text-gray-200">RS232/485 serial interfaces, standard Ethernet links, USB COM ports,</span> or optional <span className="text-gray-200">IEEE-488 GPIB interfaces</span> using industry-standard SCPI syntax.
         </p>
       </section>
 
@@ -172,13 +168,13 @@ ser.close()
               Select standard digital-controlled models for immediate dispatch or custom enterprise integration setup.
             </p>
           </div>
-          <button
-            onClick={() => onNavigate && onNavigate(AppRoute.BUY_ONLINE)}
+          <Link
+            href="/buy-800v-dc-power-supplies-online"
             className="text-[11px] font-mono text-yellow-500 hover:underline flex items-center gap-1 shrink-0"
           >
             Check Global Warehouse Stock
             <ExternalLink size={12} />
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans text-xs">
@@ -218,28 +214,37 @@ ser.close()
                 </div>
 
                 <p className="text-gray-400 text-[11px] leading-relaxed">
-                  {model.description}
+                  {model.description}{" "}
+                  {model.buyUrl && (
+                    <a
+                      href={model.buyUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors whitespace-nowrap"
+                    >
+                      View 800V {model.current}A spec ↗
+                    </a>
+                  )}
                 </p>
               </div>
 
               <div className="pt-4 mt-4 border-t border-gray-800/60">
                 {model.buyUrl ? (
-                  <a
-                    href={model.buyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => { window.location.href = model.buyUrl!; }}
                     className="flex items-center justify-center gap-1.5 py-2 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold uppercase text-[11px] rounded transition cursor-pointer w-full text-center"
                   >
                     <ShoppingCart size={12} />
                     Direct Buy Online ↗
-                  </a>
+                  </button>
                 ) : (
-                  <button
-                    onClick={() => onNavigate && onNavigate(AppRoute.BUY_ONLINE)}
+                  <Link
+                    href="/buy-800v-dc-power-supplies-online"
                     className="flex items-center justify-center gap-1.5 py-2 bg-yellow-500/85 hover:bg-yellow-500 text-gray-950 font-bold uppercase text-[11px] rounded w-full cursor-pointer"
                   >
                     Check Hub Stock
-                  </button>
+                  </Link>
                 )}
               </div>
             </div>
@@ -366,7 +371,7 @@ ser.close()
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Terminal Screen (Left) */}
-          <div className="lg:col-span-8 bg-black/80 border border-gray-800 rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between animate-fadeIn" style={{ height: "400px" }}>
+          <div className="lg:col-span-8 bg-black/80 border border-gray-800 rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between" style={{ height: "400px" }}>
             
             {/* Header */}
             <div className="bg-[#121214] px-4 py-2 border-b border-gray-800 flex justify-between items-center text-[11px] font-mono select-none">
@@ -414,7 +419,7 @@ ser.close()
                 id="btn-scpi-send"
                 type="button"
                 onClick={() => handleExecute(terminalInput)}
-                className="px-4 bg-yellow-500 text-gray-950 font-bold font-mono text-xs rounded uppercase hover:bg-yellow-400 pointer transition select-none"
+                className="px-4 bg-yellow-500 text-gray-950 font-bold font-mono text-xs rounded uppercase hover:bg-yellow-400 cursor-pointer transition select-none"
               >
                 RUN
               </button>
@@ -503,6 +508,26 @@ print("Measured Volts:", ser.readline().decode().strip())
 ser.write(b'OUTP OFF\\n')
 ser.close()`}
         </pre>
+      </section>
+
+      {/* Technical Standards & EEAT Citations Section */}
+      <section id="technical-references" className="bg-[#121214] border border-gray-800 rounded-xl p-5 space-y-4">
+        <div className="flex items-center gap-2 border-b border-gray-800 pb-2">
+          <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+          <h4 className="text-xs font-mono uppercase text-gray-200 tracking-wider">Technical Standards & Regulatory Citations</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="space-y-2 text-gray-400">
+            <p className="leading-relaxed">
+              Automated high-voltage test systems rely on industry-standard command parser architectures. The IEEE 488.2 standard defines the communication protocol layers, which are further structured by the <a href="https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments" target="_blank" rel="noopener" className="text-yellow-500 hover:underline">Standard Commands for Programmable Instruments (SCPI) Consortium</a> to guarantee uniform syntax across electrical measurement hardware.
+            </p>
+          </div>
+          <div className="space-y-2 text-gray-405">
+            <p className="leading-relaxed">
+              For system-level integration layouts and rack cabinet electrical safety wiring, refer directly to the official <a href="https://variabledcpowersupply.com/etm-8006-4-kob-0-800v-0-6a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/" target="_blank" rel="noopener" className="text-yellow-500 hover:underline font-semibold">eTM-8006 High-Power ATE Model Specification</a>. This flagship 4.8 kW 800V DC supply supports full remote SCPI scripting over USB/RS232/RS485 and Ethernet interfaces.
+            </p>
+          </div>
+        </div>
       </section>
       
     </div>

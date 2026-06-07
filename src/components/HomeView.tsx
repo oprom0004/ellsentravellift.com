@@ -3,20 +3,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
-import { Shield, Sparkles, Sliders, Settings, Zap, Layers, Server, Activity, ArrowRight, Table } from "lucide-react";
+import Link from "next/link";
+import { Shield, Sparkles, Sliders, Settings, Zap, Layers, Server, Activity, ArrowRight, Table, ZoomIn, X } from "lucide-react";
 import { POWER_MODELS } from "../data";
-import { AppRoute } from "../types";
 
-interface HomeViewProps {
-  onNavigate: (route: AppRoute) => void;
-}
+const ROUTE_PATH_MAP = {
+  "how-to-use": "/how-to-use-800v-dc-power-supply",
+  "where-to-buy": "/where-to-buy-800v-dc-power-supply",
+  "price": "/800v-dc-power-supply-price",
+  "buy-online": "/buy-800v-dc-power-supplies-online",
+  "best": "/best-800v-dc-power-supply",
+  "current-series": "/1A-to-6A-800v-dc-series",
+  "programmable": "/programmable-800v-dc-power-supply",
+  "lab": "/800v-dc-power-supply-for-lab",
+  "application": "/800v-dc-power-supply-application",
+  "intro-800v": "/800v-dc-technology-introduction",
+  "about-faq": "/etommens-etm-series-variable-power-supply-faq"
+};
 
-export default function HomeView({ onNavigate }: HomeViewProps) {
+export default function HomeView() {
   // Power Configurator State
   const [selectedCurrent, setSelectedCurrent] = useState<number>(5);
   const [useCase, setUseCase] = useState<string>("lab");
   const [remoteSense, setRemoteSense] = useState<boolean>(true);
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
 
   const matchedModel = POWER_MODELS.find(m => m.current === selectedCurrent) || POWER_MODELS[3];
   const calculatedPower = 800 * selectedCurrent;
@@ -40,7 +53,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </h1>
             
             <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-xl">
-              High-precision, robust <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener noreferrer" className="text-[#ffbc00] hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply</a> custom-designed for mid-to-high-end <span className="text-gray-200 font-medium">high-voltage laboratories, aerospace automation, heavy industrial setups</span>, and <span className="text-gray-200 font-medium">rackmount systems</span>. Engineered for extreme reliability.
+              High-precision, robust <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-[#ffbc00] hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply</a> custom-designed for mid-to-high-end <span className="text-gray-200 font-medium">high-voltage laboratories, aerospace automation, heavy industrial setups</span>, and <span className="text-gray-200 font-medium">rackmount systems</span>. Engineered for extreme reliability.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
@@ -69,68 +82,39 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </div>
           </div>
 
-          {/* Hero Right Visual: High-Tech Interactive Mockup panel */}
-          <div className="lg:col-span-5">
-            <div className="bg-[#121214] border border-gray-800 rounded-xl p-5 shadow-2xl relative font-mono text-xs text-gray-300">
-              {/* Top header decoration */}
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-gray-800">
-                <span className="text-[10px] text-gray-400 tracking-widest uppercase">eTM SERIES DIGITAL MONITOR</span>
-                <div className="flex gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
+          {/* Hero Right Visual: High-End Product Image with Click-to-Enlarge & Model Link */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center gap-3">
+            <div 
+              onClick={() => setIsLightboxOpen(true)}
+              className="relative group overflow-hidden rounded-2xl border border-gray-800 bg-[#121214] p-3 shadow-2xl transition-all duration-350 hover:border-yellow-500/30 cursor-zoom-in flex items-center justify-center w-full max-w-sm lg:max-w-none"
+            >
+              {/* Blur correction & contain styles */}
+              <img
+                src="/images/power_supply_800v.webp"
+                alt="eTommens eTM-8003C 800V 3A Variable DC Power Supply"
+                className="w-full h-auto max-h-[290px] object-contain rounded-xl transition-all duration-550 group-hover:scale-[1.01]"
+                loading="eager"
+                fetchPriority="high"
+              />
+              {/* Hover indicator overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                <div className="bg-yellow-500 text-gray-950 p-2.5 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <ZoomIn size={18} />
                 </div>
+                <span className="text-[11px] font-mono font-bold text-gray-200 tracking-wider uppercase">Click to Zoom</span>
               </div>
-
-              {/* Simulated Dual OLED Display screen */}
-              <div className="bg-black/80 border border-gray-900 rounded-lg p-4 mb-4 space-y-3 font-mono">
-                <div className="flex justify-between items-center text-yellow-500">
-                  <span className="text-[10px] text-gray-400">VOLTAGE LIMIT:</span>
-                  <span className="text-xl font-bold tracking-widest font-mono">800.00 V</span>
-                </div>
-                <div className="flex justify-between items-center text-cyan-400 border-t border-gray-900 pt-2">
-                  <span className="text-[10px] text-gray-400">CURRENT MAX:</span>
-                  <span className="text-xl font-bold tracking-widest font-mono">{selectedCurrent}.00 A</span>
-                </div>
-                <div className="flex justify-between items-center text-gray-300 border-t border-gray-900 pt-2 text-[10px]">
-                  <span>MAX POWER OUTPUT:</span>
-                  <span className="font-bold text-gray-100 font-mono">{(calculatedPower/1000).toFixed(2)} kW</span>
-                </div>
-              </div>
-
-              {/* Status lights & panel sliders */}
-              <div className="space-y-2 mb-4 text-[10px] text-gray-400">
-                <div className="flex justify-between">
-                  <span>REMOTE SENSING (S+/S-):</span>
-                  <span className={remoteSense ? "text-emerald-500 font-bold" : "text-gray-500"}>
-                    {remoteSense ? "ACTIVE" : "BYPASSED"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>CABINET FORM:</span>
-                  <span className="text-gray-200">{matchedModel.rackSize}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>ESTIMATED UNIT BASE PRICE:</span>
-                  <span className="text-yellow-500 font-bold">${matchedModel.basePrice.toLocaleString()} USD</span>
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-gray-800 flex justify-between gap-2">
-                <button
-                  id="btn-nav-price-pricing"
-                  onClick={() => onNavigate(AppRoute.PRICE)}
-                  className="w-1/2 py-2 bg-[#1c1c1f] text-center text-gray-300 hover:text-white rounded-md border border-gray-800 hover:bg-gray-800 transition block text-[11px] cursor-pointer"
-                >
-                  View Details & Pricing
-                </button>
-                <button
-                  id="btn-nav-test-how-to-use"
-                  onClick={() => onNavigate(AppRoute.HOW_TO_USE)}
-                  className="w-1/2 py-2 bg-yellow-500/10 text-center text-yellow-500 hover:bg-yellow-500/20 rounded-md border border-yellow-500/20 transition block text-[11px] font-medium cursor-pointer"
-                >
-                  Test Power System
-                </button>
-              </div>
+            </div>
+            
+            {/* Caption & Model Outbound Link */}
+            <div className="text-center">
+              <a 
+                href="https://variabledcpowersupply.com/etm-8003c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-3a-with-5-powerful-protections-output-switch-control-low-noise/"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-1.5 text-[11px] font-mono text-gray-400 hover:text-yellow-500 transition-colors uppercase tracking-widest font-semibold cursor-pointer"
+              >
+                Model Shown: eTM-8003C (800V 3A 2.4kW) ↗
+              </a>
             </div>
           </div>
         </div>
@@ -337,38 +321,38 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
           </table>
         </div>
         <div className="flex justify-end">
-          <button
+          <Link
             id="btn-nav-all-specs"
-            onClick={() => onNavigate(AppRoute.CURRENT_SERIES)}
+            href="/1A-to-6A-800v-dc-series"
             className="text-xs text-yellow-500 hover:text-yellow-400 flex items-center gap-1 font-mono uppercase cursor-pointer"
           >
             Review Expanded Specifications
             <ArrowRight size={13} />
-          </button>
+          </Link>
         </div>
       </section>
 
-      {/* Quick Inner Page Index (Satisfying "variabledcpowersupply.com - 内页") */}
+      {/* Quick Inner Page Index */}
       <section id="features-index-grid" className="space-y-4">
         <h3 className="text-sm font-mono uppercase tracking-wider text-gray-400">Technical Information Portal</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            { tag: "GUIDE", title: "How to Use 800V Power Supply", route: AppRoute.HOW_TO_USE, desc: "Step-by-step physical installation loop, remote wiring layouts and safety LOTO steps." },
-            { tag: "PROCUREMENT", title: "Where to Buy 800V DC Power Supplies", route: AppRoute.WHERE_TO_BUY, desc: "Direct factory purchase channels, official checkout landing page, and international logistics." },
-            { tag: "VALUATION", title: "800V DC Series Price List", route: AppRoute.PRICE, desc: "Detailed pricing matrices, cost factors, optional digital interfaces, and bulk volume terms." },
-            { tag: "STORE", title: "Online Stock & Pricing Portal", route: AppRoute.BUY_ONLINE, desc: "Global depot stock search engine, real-time warehouse inventory, and official e-commerce store links." },
-            { tag: "RELIABILITY", title: "Best 800V System Comparison", route: AppRoute.BEST_SUPPLY, desc: "Contrast analytics matching eTommens units against budget alternatives on core noise indices." },
-            { tag: "CODELAB", title: "Programmable Commands SCPI", route: AppRoute.PROGRAMMABLE, desc: "Live terminal syntax simulation using standard SCPI protocols with exported Python blocks." },
-            { tag: "SAFETY", title: "800V Power Supplies for Lab", route: AppRoute.LAB_USE, desc: "Safety interlock system schematics, low-drift calibration, and low-ripple guidelines." },
-            { tag: "CASE STUDIES", title: "High-Voltage Tech Applications", route: AppRoute.APPLICATION, desc: "In-depth deployment reviews in solar MPPT tracks, motor drives, and EV powertrain circuits." },
-            { tag: "TECHNOLOGY", title: "800V DC Technology Intro", route: AppRoute.INTRO_800V, desc: "Explore why 800V represents the standard electric vehicle blueprint, reducing line losses and copper weight." },
-            { tag: "ABOUT / FAQ", title: "About eTommens & ETM FAQs", route: AppRoute.ABOUT_ETM, desc: "Discover corporate calibration standards, international shipping weights, and stateful setup responses." }
+            { tag: "GUIDE", title: "How to Use 800V Power Supply", route: "how-to-use", desc: "Step-by-step physical installation loop, remote wiring layouts and safety LOTO steps." },
+            { tag: "PROCUREMENT", title: "Where to Buy 800V DC Power Supplies", route: "where-to-buy", desc: "Direct factory purchase channels, official checkout landing page, and international logistics." },
+            { tag: "VALUATION", title: "800V DC Series Price List", route: "price", desc: "Detailed pricing matrices, cost factors, optional digital interfaces, and bulk volume terms." },
+            { tag: "STORE", title: "Online Stock & Pricing Portal", route: "buy-online", desc: "Global depot stock search engine, real-time warehouse inventory, and official e-commerce store links." },
+            { tag: "RELIABILITY", title: "Best 800V System Comparison", route: "best", desc: "Contrast analytics matching eTommens units against budget alternatives on core noise indices." },
+            { tag: "CODELAB", title: "Programmable Commands SCPI", route: "programmable", desc: "Live terminal syntax simulation using standard SCPI protocols with exported Python blocks." },
+            { tag: "SAFETY", title: "800V Power Supplies for Lab", route: "lab", desc: "Safety interlock system schematics, low-drift calibration, and low-ripple guidelines." },
+            { tag: "CASE STUDIES", title: "High-Voltage Tech Applications", route: "application", desc: "In-depth deployment reviews in solar MPPT tracks, motor drives, and EV powertrain circuits." },
+            { tag: "TECHNOLOGY", title: "800V DC Technology Intro", route: "intro-800v", desc: "Explore why 800V represents the standard electric vehicle blueprint, reducing line losses and copper weight." },
+            { tag: "ABOUT / FAQ", title: "About eTommens & ETM FAQs", route: "about-faq", desc: "Discover corporate calibration standards, international shipping weights, and stateful setup responses." }
           ].map((card, idx) => (
-            <div
+            <Link
               key={idx}
               id={`idx-card-${idx}`}
-              onClick={() => onNavigate(card.route)}
-              className="p-5 bg-[#121214] border border-gray-800 hover:border-yellow-500/40 rounded-xl space-y-3 cursor-pointer hover:bg-gray-800/10 transition group"
+              href={ROUTE_PATH_MAP[card.route as keyof typeof ROUTE_PATH_MAP]}
+              className="p-5 bg-[#121214] border border-gray-800 hover:border-yellow-500/40 rounded-xl space-y-3 cursor-pointer hover:bg-gray-800/10 transition group block"
             >
               <div className="flex justify-between items-center">
                 <span className="text-[9px] font-mono font-bold px-2 py-0.5 bg-gray-800 uppercase tracking-widest text-gray-400 rounded">
@@ -384,7 +368,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               <p className="text-xs text-gray-400 leading-normal">
                 {card.desc}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -402,27 +386,66 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             <span>Official Brand Store</span>
           </div>
           <h3 className="text-xl md:text-2xl font-sans font-bold text-gray-100 tracking-tight">
-            Order eTommens 800V Programmable DC Series
+            Official Factory Store Checkout
           </h3>
           <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
-            Visit our authorized factory e-commerce platform to browse live availability, check delivery schedules, and purchase models securely.
+            For direct online ordering, credit card payments, and factory-direct shipping, please complete your checkout at the official online store.
           </p>
         </div>
 
         <div className="max-w-md mx-auto pt-2 flex flex-col items-center">
-          <a
-            href="https://variabledcpowersupply.com/800v-dc-power-supplies"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => { window.location.href = "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
             className="w-full text-center py-3 bg-[#ffbc00] hover:bg-yellow-400 text-gray-950 font-extrabold text-xs uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 select-none shadow-lg shadow-yellow-500/10 hover:scale-[1.01] cursor-pointer"
           >
-            🛒 Checkout on Official Store ↗
-          </a>
+            🛒 Buy Directly from Official Store ↗
+          </button>
           <span className="block text-[10px] text-gray-500 mt-2 font-mono">
             Secure checkout powered by bank-grade encrypted SSL gateway
           </span>
         </div>
       </section>
+
+      {/* Full-screen Lightbox Modal Overlay */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity duration-300"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          {/* Close Button */}
+          <button 
+            type="button"
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-6 right-6 p-2 rounded-full bg-gray-900/80 border border-gray-850 text-gray-400 hover:text-white transition cursor-pointer"
+          >
+            <X size={24} />
+          </button>
+          
+          {/* Image Container */}
+          <div 
+            className="relative p-4 max-w-5xl max-h-[90vh] flex flex-col items-center justify-center gap-4 animate-in fade-in zoom-in-95 duration-200"
+            onClick={e => e.stopPropagation()}
+          >
+            <img
+              src="/images/power_supply_800v.webp"
+              alt="eTommens eTM-8003C 800V 3A Variable DC Power Supply"
+              className="max-w-full max-h-[75vh] object-contain rounded-lg border border-gray-800 shadow-2xl"
+              loading="lazy"
+            />
+            <div className="text-center space-y-1.5">
+              <span className="block text-sm font-sans font-bold text-gray-200">eTommens eTM-8003C (800V 3A 2.4kW)</span>
+              <Link 
+                href="/1A-to-6A-800v-dc-series"
+                onClick={() => setIsLightboxOpen(false)}
+                className="inline-flex items-center gap-1 text-xs font-mono text-yellow-500 hover:underline cursor-pointer"
+              >
+                View ETM 800V Series Technical Specifications ➔
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

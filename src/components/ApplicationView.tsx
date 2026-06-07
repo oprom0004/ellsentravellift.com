@@ -3,16 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
+import Link from "next/link";
 import { APPLICATION_CASES } from "../data";
-import { AppRoute } from "../types";
 import { Zap, BatteryCharging, Sun, FlaskConical, Cpu, ShieldCheck } from "lucide-react";
 
-interface ApplicationProps {
-  onNavigate: (route: AppRoute) => void;
-}
-
-export default function ApplicationView({ onNavigate }: ApplicationProps) {
+export default function ApplicationView() {
   const [activeCaseId, setActiveCaseId] = useState<string>("ev-charging-battery");
 
   // Interactive Ohm/OBC Load Estimator states:
@@ -53,7 +51,7 @@ export default function ApplicationView({ onNavigate }: ApplicationProps) {
           Industrial & Research Applications of 800V DC Systems
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          The transformation toward clean grid-ties, photovoltaic arrays, and high-voltage 800V electric vehicle architectures requires reliable, continuous testing sources. Explore direct application analyses below.
+          The transformation toward clean grid-ties, photovoltaic arrays, and high-voltage 800V electric vehicle architectures requires a reliable <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply</a> as a continuous testing source. Explore direct application analyses below.
         </p>
       </section>
 
@@ -107,12 +105,12 @@ export default function ApplicationView({ onNavigate }: ApplicationProps) {
           </div>
 
           <div className="pt-2 border-t border-gray-800 flex gap-2">
-            <button
-              onClick={() => onNavigate(AppRoute.PRICE)}
-              className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-950 font-extrabold uppercase text-[11px] rounded transition cursor-pointer"
+            <Link
+              href="/800v-dc-power-supply-price"
+              className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-950 font-extrabold uppercase text-[11px] rounded transition cursor-pointer inline-flex items-center"
             >
               Configure {suggestedModel} specs & prices ➔
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -164,11 +162,11 @@ export default function ApplicationView({ onNavigate }: ApplicationProps) {
               <span>Target Standard Voltage:</span>
               <span className="text-gray-200">800.00 Volts</span>
             </div>
-            <div className="flex justify-between text-gray-400 font-semibold">
+            <div className="flex justify-between text-gray-450">
               <span>Calculated Current Draw:</span>
               <span className="text-cyan-400 font-mono font-bold">{calculatedAmps} Amps</span>
             </div>
-            <div className="flex justify-between text-gray-400">
+            <div className="flex justify-between text-gray-450">
               <span>Active Peak Thermal Output:</span>
               <span className="text-yellow-400 font-bold">{calculatedPowerWatts.toLocaleString()} Watts ({(calculatedPowerWatts/1000).toFixed(2)} kW)</span>
             </div>
@@ -178,7 +176,69 @@ export default function ApplicationView({ onNavigate }: ApplicationProps) {
               <span className="text-yellow-500 font-bold">{suggestedModel}</span>
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* Complete Application Cases Directory */}
+      <section id="all-cases-directory" className="space-y-6 pt-8 border-t border-gray-800">
+        <div>
+          <h2 className="text-lg font-sans font-bold text-gray-100 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+            Deep-Dive: 800V DC Power Supply Field Implementations
+          </h2>
+          <p className="text-xs text-gray-400 mt-1 max-w-4xl">
+            Read complete engineering breakdowns of high-voltage DC power supply implementations across electric propulsion, solar grid validation, materials research, and heavy industrial automation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {APPLICATION_CASES.map(c => (
+            <div key={c.id} className="bg-[#121214] border border-gray-800 rounded-xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-3 border-b border-gray-850">
+                <div className="text-yellow-500 shrink-0">
+                  {getIcon(c.icon)}
+                </div>
+                <div>
+                  <span className="block text-[9px] font-mono text-gray-500 uppercase tracking-wider">{c.subtitle}</span>
+                  <h3 className="text-xs font-sans font-bold text-gray-200">{c.title}</h3>
+                </div>
+              </div>
+              <div className="space-y-3 text-xs leading-relaxed text-gray-400">
+                <div>
+                  <strong className="text-[11px] text-gray-300 block mb-0.5 font-semibold">Engineering Challenge:</strong>
+                  <p className="text-justify">{c.problem}</p>
+                </div>
+                <div>
+                  <strong className="text-[11px] text-gray-300 block mb-0.5 font-semibold font-medium">System Solution:</strong>
+                  <p className="text-justify">{c.solution}</p>
+                </div>
+                <div className="p-3 bg-black/35 border border-gray-900 rounded-lg">
+                  <span className="block uppercase text-[8px] font-mono text-yellow-500 font-bold mb-0.5">Required Operational Specs:</span>
+                  <p className="font-mono text-gray-300 text-[10px] leading-normal">{c.specDemanded}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Technical Standards & EEAT Citations Section */}
+      <section id="technical-references" className="bg-[#121214] border border-gray-800 rounded-xl p-5 space-y-4">
+        <div className="flex items-center gap-2 border-b border-gray-800 pb-2">
+          <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+          <h4 className="text-xs font-mono uppercase text-gray-200 tracking-wider">Technical Standards & Regulatory Citations</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="space-y-2 text-gray-400">
+            <p className="leading-relaxed">
+              Industrial applications in photovoltaic grid-ties and electric vehicle charging verification require rigorous safety compliance. Design parameters and performance benchmarks for high-voltage DC conversion are documented by the <a href="https://www.ieee.org" target="_blank" rel="noopener" className="text-yellow-500 hover:underline">IEEE Power Electronics Society Standards</a>, which dictate ripple attenuation and electrical isolation limits.
+            </p>
+          </div>
+          <div className="space-y-2 text-gray-405">
+            <p className="leading-relaxed">
+              For complete dynamic simulation testing specs and solar cell MPPT tracking calculations, consult the official <a href="https://variabledcpowersupply.com/etm-8005-4-kob-0-800v-0-5a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/" target="_blank" rel="noopener" className="text-yellow-500 hover:underline font-semibold">eTM-8005 Solar & EV Simulator Spec Sheet</a>. It provides a robust 4.0 kW output with isolated remote sense features.
+            </p>
+          </div>
         </div>
       </section>
 

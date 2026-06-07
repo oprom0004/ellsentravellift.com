@@ -3,16 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
-import { PowerModel, AppRoute } from "../types";
 import { POWER_MODELS } from "../data";
-import { DollarSign, ShieldCheck, Tag, Info, Sliders, ReceiptText } from "lucide-react";
+import { DollarSign, Info, Sliders, ReceiptText } from "lucide-react";
 
-interface PriceViewProps {
-  onNavigate: (route: AppRoute) => void;
-}
-
-export default function PriceView({ onNavigate }: PriceViewProps) {
+export default function PriceView() {
   // Option State variables
   const [selectedModelId, setSelectedModelId] = useState<string>("eTM-8005");
   const [qty, setQty] = useState<number>(1);
@@ -82,13 +79,13 @@ export default function PriceView({ onNavigate }: PriceViewProps) {
                     <a
                       href={m.buyUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
                       className="font-mono font-bold text-yellow-500 hover:text-yellow-400 underline decoration-yellow-500/30 hover:decoration-yellow-400 cursor-pointer transition-colors"
                     >
-                      {m.id}
+                      View {m.id} (800V {m.current}A) spec ↗
                     </a>
                     <span className="text-[10px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded uppercase font-mono">{m.rackSize.split(" ")[0]} Frame</span>
                   </div>
@@ -101,7 +98,7 @@ export default function PriceView({ onNavigate }: PriceViewProps) {
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open(m.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies", "_blank");
+                      window.location.href = m.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies";
                     }}
                     className="mt-1 px-2.5 py-1 bg-yellow-500 text-gray-950 hover:bg-yellow-400 text-[10px] font-sans font-extrabold uppercase tracking-wider rounded transition-all shadow shadow-yellow-500/10 flex items-center gap-1 select-none cursor-pointer inline-flex"
                   >
@@ -232,7 +229,7 @@ export default function PriceView({ onNavigate }: PriceViewProps) {
                 <button
                   type="button"
                   onClick={() => setOptions(o => ({ ...o, extendedWarranty: !o.extendedWarranty }))}
-                  className={`p-3 text-left border rounded-lg transition-colors cursor-pointer flex justify-between items-center sm:col-span-2 ${
+                  className={`p-3 text-left border rounded-lg transition-colors cursor-pointer sm:col-span-2 ${
                     options.extendedWarranty ? "bg-yellow-500/5 border-yellow-500 text-gray-200" : "bg-[#18181b] border-gray-800 text-gray-400"
                   }`}
                 >
@@ -323,11 +320,11 @@ export default function PriceView({ onNavigate }: PriceViewProps) {
               <button
                 type="button"
                 onClick={() => {
-                  window.open(selectedModel.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies", "_blank");
+                  window.location.href = selectedModel.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies";
                 }}
                 className="block w-full py-3 bg-[#ffbc00] hover:bg-yellow-400 active:scale-[0.98] active:bg-yellow-500 text-gray-950 font-extrabold rounded-lg text-xs tracking-wider uppercase transition-all duration-150 text-center shadow-lg select-none cursor-pointer"
               >
-                🛒 Checkout on Official Store ↗
+                🛒 Buy Directly from Official Store ↗
               </button>
             </div>
           </div>

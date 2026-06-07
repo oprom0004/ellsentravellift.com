@@ -21,7 +21,7 @@ export default function Intro800VView() {
             Understanding 800V DC Power Tech
           </h2>
           <p className="text-sm text-gray-400 leading-relaxed font-sans">
-            The transition from low-voltage systems to high-voltage direct current (HVDC) architectures like 800V DC represents a monumental shift across electric vehicles, renewable storage grid integrations, aerospace electronics, and core research laboratorial test loops. Discover why 800V is the sweet spot of heavy duty simulation.
+            The transition from low-voltage systems to high-voltage direct current (HVDC) architectures like <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply</a> systems represents a monumental shift across electric vehicles, renewable storage grid integrations, aerospace electronics, and core research laboratorial test loops. Discover why 800V is the sweet spot of heavy duty simulation.
           </p>
         </div>
       </section>

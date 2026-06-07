@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Shield, HelpCircle, ToggleLeft, Zap, Wrench, CheckSquare, RefreshCw } from "lucide-react";
 
@@ -90,7 +92,7 @@ export default function HowToUseView() {
           How to Use an 800V DC Power Supply Correctly
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          Deploying an <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener noreferrer" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC Power Supply</a> requires extreme caution and meticulous safety procedures. Due to the severe hazard associated with <span className="text-red-400 font-bold">800V DC (High Voltage Electrical Class B)</span>, operation is fundamentally different from typical 12V or 24V bench power blocks. Retained capacitance thermal energy can induce terminal shocks even several minutes after shutting off the device. This deployment document presents physical steps and standard compliance sequences.
+          Deploying an <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC Power Supply</a> requires extreme caution and meticulous safety procedures. Due to the severe hazard associated with <span className="text-red-400 font-bold">800V DC (High Voltage Electrical Class B)</span>, operation is fundamentally different from typical 12V or 24V bench power blocks. Retained capacitance thermal energy can induce terminal shocks even several minutes after shutting off the device. This deployment document presents physical steps and standard compliance sequences.
         </p>
       </section>
 
@@ -302,17 +304,36 @@ export default function HowToUseView() {
 
       </div>
 
+      {/* Technical Standards & EEAT Citations Section */}
+      <section id="technical-references" className="bg-[#121214] border border-gray-800 rounded-xl p-5 space-y-4">
+        <div className="flex items-center gap-2 border-b border-gray-800 pb-2">
+          <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+          <h4 className="text-xs font-mono uppercase text-gray-200 tracking-wider">Technical Standards & Regulatory Citations</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="space-y-2 text-gray-400">
+            <p className="leading-relaxed">
+              When operating high-voltage benchtop power supplies up to 800V, strict adherence to international electrical safety regulations is required. For industrial facilities, compliance with the <a href="https://www.osha.gov/control-hazardous-energy" target="_blank" rel="noopener" className="text-yellow-500 hover:underline">OSHA Lockout/Tagout (LOTO) Standard 1910.147</a> is mandatory to control hazardous high-voltage DC energy during machine maintenance and testing operations.
+            </p>
+          </div>
+          <div className="space-y-2 text-gray-405">
+            <p className="leading-relaxed">
+              For complete wiring configurations, power terminal safety latch characteristics, and detailed load calculations, refer directly to the official <a href="https://variabledcpowersupply.com/etm-8003c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-3a-with-5-powerful-protections-output-switch-control-low-noise/" target="_blank" rel="noopener" className="text-yellow-500 hover:underline font-semibold">eTM-8003C 3A Industrial Model Specification</a>. This unit includes independent physical output control switches for hot-wire isolation compliance.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Bottom direct link button */}
       <div className="pt-8 border-t border-gray-800 flex flex-col items-center text-center space-y-4">
         <h4 className="text-sm font-sans font-semibold text-gray-200">Need immediate official high-voltage hardware provisioning?</h4>
-        <a
-          href="https://variabledcpowersupply.com/800v-dc-power-supplies"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={() => { window.location.href = "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
           className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-extrabold uppercase text-xs tracking-wider rounded-lg transition-all shadow-lg shadow-yellow-500/10 hover:scale-[1.02] cursor-pointer"
         >
           Buy 800V Units Directly from Official Store ↗
-        </a>
+        </button>
       </div>
     </div>
   );

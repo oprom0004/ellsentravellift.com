@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
 import { FlaskConical, ShieldCheck, ShieldAlert, Cpu, HeartPulse } from "lucide-react";
 
@@ -22,7 +24,7 @@ export default function LabUseView() {
           800V DC Power Supplies for High Voltage Laboratories
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          Scientific R&D cells, university electrical engineering classrooms, and national aerospace testing beds require precise DC power with rigorous safety precautions. Traditional high-voltage sources lack proper user barriers. eTommens power supplies deploy <span className="text-gray-200">galvanic hardware safety interlocks, remote sensings, and under-75mV residual voltage ripplings</span> specifically customized for precision research environments.
+          Scientific R&D cells, university electrical engineering classrooms, and national aerospace testing beds require a precise <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V laboratory DC power supply</a> with rigorous safety precautions. Traditional high-voltage sources lack proper user barriers. eTommens power supplies deploy <span className="text-gray-200">galvanic hardware safety interlocks, remote sensings, and under-75mV residual voltage ripplings</span> specifically customized for precision research environments.
         </p>
       </section>
 
@@ -108,6 +110,26 @@ export default function LabUseView() {
           </div>
         </div>
 
+      </section>
+
+      {/* Technical Standards & EEAT Citations Section */}
+      <section id="technical-references" className="bg-[#121214] border border-gray-800 rounded-xl p-5 space-y-4">
+        <div className="flex items-center gap-2 border-b border-gray-800 pb-2">
+          <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+          <h4 className="text-xs font-mono uppercase text-gray-200 tracking-wider">Technical Standards & Regulatory Citations</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="space-y-2 text-gray-400">
+            <p className="leading-relaxed">
+              Laboratory high-voltage electrical setups must satisfy strict safety requirements for testing personnel. Compliance with the international standard <a href="https://www.iec.ch" target="_blank" rel="noopener" className="text-yellow-500 hover:underline">IEC 61010-1 Safety Requirements</a> is essential to ensure measurement and control equipment used in laboratories prevents shock hazards under normal and single-fault conditions.
+            </p>
+          </div>
+          <div className="space-y-2 text-gray-405">
+            <p className="leading-relaxed">
+              For academic research cells and semiconductor testing requiring low ripple limits, refer to the official <a href="https://variabledcpowersupply.com/etm-8001-4-kob-0-800v-0-1a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/" target="_blank" rel="noopener" className="text-yellow-500 hover:underline font-semibold">eTM-8001 Low-Noise Precision Model Specs</a>. It delivers a 1A rated output with low drift deviations and a precise 12mV tuning resolution.
+            </p>
+          </div>
+        </div>
       </section>
 
     </div>

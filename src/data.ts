@@ -6,6 +6,7 @@
 import { PowerModel } from "./types";
 
 export const POWER_MODELS: PowerModel[] = [
+  // 1A Models
   {
     id: "eTM-8001",
     name: "eTommens eTM-8001",
@@ -15,15 +16,35 @@ export const POWER_MODELS: PowerModel[] = [
     rackSize: "2U Bench & Rackmount",
     ripple: "≤ 50mVrms / ≤ 120mVp-p",
     transient: "≤ 1.0 ms (50% to 100% Load Change)",
-    basePrice: 539,
-    description: "Compact high-precision 800V programmable DC power supply designed for engineering workbenches, academic research and low-current high-voltage hardware testing.",
+    basePrice: 699,
+    description: "Classic 4-Knob design high-precision 800V programmable DC power supply designed for engineering workbenches, academic research and low-current high-voltage hardware testing.",
     features: [
-      "Ultra-low ripple and noise suitable for sensitive laboratory circuits",
-      "Support for serial & parallel combinations with automatic load balancing",
-      "Standard USB & RS232 programming ports, with optional Ethernet/SCPI"
+      "Classic 4-Knob design (Voltage Coarse/Fine, Current Coarse/Fine) for intuitive manual control",
+      "Ultra-low ripple and noise suitable for sensitive laboratory and university circuits",
+      "Standard USB & RS232 programming ports, with optional Ethernet/SCPI interface"
     ],
     buyUrl: "https://variabledcpowersupply.com/etm-8001-4-kob-0-800v-0-1a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/"
   },
+  {
+    id: "eTM-8001C",
+    name: "eTommens eTM-8001C",
+    voltage: 800,
+    current: 1,
+    power: 800,
+    rackSize: "2U Bench & Rackmount",
+    ripple: "≤ 50mVrms / ≤ 120mVp-p",
+    transient: "≤ 1.0 ms (50% to 100% Load Change)",
+    basePrice: 749,
+    description: "Upgraded 2-Knob model with output switch control. Perfect for high-voltage testing requiring safe connection gating and advanced hardware-level protections.",
+    features: [
+      "Upgraded 2-Knob design (Encoder Coarse & Fine Adjustments Knob) with high accuracy",
+      "Independent hardware Output Switch Control button for safe load connection/disconnection",
+      "5 powerful hardware protections: OVP, OCP, OPP, OTP, and Short Circuit Protection",
+      "Specialized quiet-running cooling fan design for low-noise laboratory work environments"
+    ],
+    buyUrl: "https://variabledcpowersupply.com/etm-8001c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-1a-with-5-powerful-protections-output-switch-control-low-noise/"
+  },
+  // 2A Models
   {
     id: "eTM-8002",
     name: "eTommens eTM-8002",
@@ -33,33 +54,73 @@ export const POWER_MODELS: PowerModel[] = [
     rackSize: "2U Standard Rackmount",
     ripple: "≤ 60mVrms / ≤ 150mVp-p",
     transient: "≤ 1.2 ms (50% to 100% Load Change)",
-    basePrice: 699,
-    description: "Automated test equipment (ATE) optimization model. Ideal for manufacturing burn-in chambers, battery cell simulation clusters, and capacitor performance tests.",
+    basePrice: 799,
+    description: "Classic 4-Knob automated test equipment (ATE) optimization model. Ideal for manufacturing burn-in chambers, battery cell simulation clusters, and capacitor performance tests.",
     features: [
+      "Classic 4-Knob configuration for fast voltage and current limit adjustment",
       "Built-in list mode programming for automated test cycles without host PC latency",
-      "Over-voltage (OVP), Over-current (OCP) and Over-temperature (OTP) auto-cutoff",
-      "Dual active cooling cooling system with smart temperature-based speed control"
+      "Dual active cooling system with smart temperature-based speed control"
     ],
     buyUrl: "https://variabledcpowersupply.com/etm-8002-4-kob-0-800v-0-2a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/"
   },
   {
+    id: "eTM-8002C",
+    name: "eTommens eTM-8002C",
+    voltage: 800,
+    current: 2,
+    power: 1600,
+    rackSize: "2U Standard Rackmount",
+    ripple: "≤ 60mVrms / ≤ 150mVp-p",
+    transient: "≤ 1.2 ms (50% to 100% Load Change)",
+    basePrice: 848,
+    description: "Upgraded 2-Knob 2A model with embedded output switch control, 5 powerful hardware protections, and specialized low-noise design.",
+    features: [
+      "Upgraded 2-Knob design (Encoder Coarse & Fine Adjustments Knob) with precise tuning",
+      "Integrated Output Switch Control button to toggle load state instantly",
+      "5 powerful hardware protections: OVP, OCP, OPP, OTP, and Short Circuit Protection",
+      "Low-noise operation suitable for continuous testing next to laboratory technicians"
+    ],
+    buyUrl: "https://variabledcpowersupply.com/etm-8002c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-2a-with-5-powerful-protections-output-switch-control-low-noise/"
+  },
+  // 3A Models
+  {
     id: "eTM-8003",
-    name: "eTommens eTM-8003C-2-KOB",
+    name: "eTommens eTM-8003",
     voltage: 800,
     current: 3,
     power: 2400,
     rackSize: "3U Rugged Rackmount",
     ripple: "≤ 70mVrms / ≤ 180mVp-p",
     transient: "≤ 1.2 ms (50% to 100% Load Change)",
-    basePrice: 899,
-    description: "Designed for continuous duty cycles in factory automation. Excellent isolation parameters permit safe operation adjacent to high-speed electrical machinery. Complete with output switch control, 5 powerful protections, and low noise design.",
+    basePrice: 1198,
+    description: "Classic 4-Knob 3A model designed for continuous duty cycles in factory automation. Excellent isolation parameters permit safe operation adjacent to high-speed electrical machinery.",
     features: [
-      "Complete galvanic isolation rating up to 3000VAC between chassis and electrical lines",
-      "Advanced PFC circuit (Power Factor Correction > 0.98 at full load)",
-      "Vibration-isolated mechanical structure optimized for shop-floor server racks"
+      "Classic 4-Knob controls for reliable manual power tuning on factory floors",
+      "Advanced PFC circuit (Power Factor Correction > 0.98 at full load) for efficiency",
+      "Vibration-isolated mechanical structure optimized for standard shop-floor server racks"
+    ],
+    buyUrl: "https://variabledcpowersupply.com/etm-8003-4-kob-0-800v-0-3a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/"
+  },
+  {
+    id: "eTM-8003C",
+    name: "eTommens eTM-8003C",
+    voltage: 800,
+    current: 3,
+    power: 2400,
+    rackSize: "3U Rugged Rackmount",
+    ripple: "≤ 70mVrms / ≤ 180mVp-p",
+    transient: "≤ 1.2 ms (50% to 100% Load Change)",
+    basePrice: 1199,
+    description: "Upgraded 2-Knob 3A model with independent output switch control and 5 powerful protections. Optimized for high-voltage automated ATE racks.",
+    features: [
+      "Upgraded 2-Knob design (Encoder Coarse & Fine Adjustments Knob)",
+      "Front-panel Output Switch Control button for safe, click-to-activate terminal gating",
+      "5 powerful hardware protections: OVP, OCP, OPP, OTP, and Short Circuit Protection",
+      "Special low-noise engineering design with dynamic fan exhaust profile"
     ],
     buyUrl: "https://variabledcpowersupply.com/etm-8003c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-3a-with-5-powerful-protections-output-switch-control-low-noise/"
   },
+  // 5A Models
   {
     id: "eTM-8005",
     name: "eTommens eTM-8005",
@@ -69,15 +130,35 @@ export const POWER_MODELS: PowerModel[] = [
     rackSize: "3U Rugged Rackmount",
     ripple: "≤ 85mVrms / ≤ 200mVp-p",
     transient: "≤ 1.5 ms (50% to 100% Load Change)",
-    basePrice: 1120,
-    description: "High-power density 4.0 kW model built for EV battery pack charge/discharge cycling, onboard charger validation schemes, and solar PV array tracking simulation.",
+    basePrice: 1399,
+    description: "Classic 4-Knob high-power density 4.0 kW model built for EV battery pack charge/discharge cycling, onboard charger validation schemes, and solar PV array tracking simulation.",
     features: [
+      "Classic 4-Knob tuning setup with large, highly legible 4-digit LED display",
       "Integrated PV simulation mode (creates typical I-V curves for solar panel testing)",
-      "High capacity current control with rapid discharge circuit for speedy voltage ramps down",
-      "Standard Ethernet LAN interface with full web-based setup dashboard panel"
+      "High capacity current control with rapid discharge circuit for speedy voltage ramps down"
     ],
     buyUrl: "https://variabledcpowersupply.com/etm-8005-4-kob-0-800v-0-5a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/"
   },
+  {
+    id: "eTM-8005C",
+    name: "eTommens eTM-8005C",
+    voltage: 800,
+    current: 5,
+    power: 4000,
+    rackSize: "3U Rugged Rackmount",
+    ripple: "≤ 85mVrms / ≤ 200mVp-p",
+    transient: "≤ 1.5 ms (50% to 100% Load Change)",
+    basePrice: 1599,
+    description: "Upgraded 2-Knob 5A high-power model featuring independent output switch control, 5 powerful protections, and low-noise operational circuitry.",
+    features: [
+      "Upgraded 2-Knob design (Encoder Coarse & Fine Adjustments Knob)",
+      "Dedicated Output Switch Control for toggling 4kW power terminals safely",
+      "5 powerful hardware protections: OVP, OCP, OPP, OTP, and Short Circuit Protection",
+      "Low-noise active cooling and advanced electrical noise filtering"
+    ],
+    buyUrl: "https://variabledcpowersupply.com/etm-8005c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-5a-with-5-powerful-protections-output-switch-control-low-noise/"
+  },
+  // 6A Models
   {
     id: "eTM-8006",
     name: "eTommens eTM-8006",
@@ -87,14 +168,33 @@ export const POWER_MODELS: PowerModel[] = [
     rackSize: "3U Heavy Industrial Rack",
     ripple: "≤ 95mVrms / ≤ 220mVp-p",
     transient: "≤ 1.5 ms (50% to 100% Load Change)",
-    basePrice: 1260,
-    description: "Our flagship heavy-duty 4.8 kW 800V DC power supply. Tailored for testing electric drivetrains, heavy high-voltage servo motors, and direct replacement of high-voltage generator arrays.",
+    basePrice: 1799,
+    description: "Classic 4-Knob flagship heavy-duty 4.8 kW 800V DC power supply. Tailored for testing electric drivetrains, heavy high-voltage servo motors, and direct replacement of generator arrays.",
     features: [
+      "Classic 4-Knob manual controls for heavy-duty industrial electric component stress testing",
       "Rugged continuous 100% capacity operations at up to 50°C ambient temperatures",
-      "Redundant safety relays with external interlock loop connector",
       "Direct digital monitoring and sequence control software license bundle included"
     ],
     buyUrl: "https://variabledcpowersupply.com/etm-8006-4-kob-0-800v-0-6a-high-power-bench-dc-power-supply-variable-with-4-digits-led-display-encoder-coarse-fine-adjustments-knob-short-circuit-protection/"
+  },
+  {
+    id: "eTM-8006C",
+    name: "eTommens eTM-8006C",
+    voltage: 800,
+    current: 6,
+    power: 4800,
+    rackSize: "3U Heavy Industrial Rack",
+    ripple: "≤ 95mVrms / ≤ 220mVp-p",
+    transient: "≤ 1.5 ms (50% to 100% Load Change)",
+    basePrice: 1899,
+    description: "Upgraded 2-Knob flagship heavy-duty 4.8 kW 800V DC power supply with output switch control, 5 powerful hardware protections, and specialized low-noise design.",
+    features: [
+      "Upgraded 2-Knob design (Encoder Coarse & Fine Adjustments Knob) for peak programming control",
+      "Embedded Output Switch Control for toggling maximum 4.8kW power safely",
+      "5 powerful hardware protections: OVP, OCP, OPP, OTP, and Short Circuit Protection",
+      "Advanced low-noise electrical design with silent smart cooling fans module"
+    ],
+    buyUrl: "https://variabledcpowersupply.com/etm-8006c-2-kob-high-power-dc-bench-power-supply-adjustable-800v-6a-with-5-powerful-protections-output-switch-control-low-noise/"
   }
 ];
 

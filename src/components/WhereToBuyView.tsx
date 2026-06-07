@@ -1,7 +1,4 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+"use client";
 
 import React from "react";
 import { Mail, Phone, MapPin, Globe, Award, ShieldCheck, Clock, FileText } from "lucide-react";
@@ -43,14 +40,13 @@ export default function WhereToBuyView() {
           <p className="text-gray-400 text-sm leading-relaxed max-w-2xl">
             Purchase directly from the factory at <span className="text-yellow-500 font-bold">variabledcpowersupply.com</span> or contact our local distributors. We facilitate global customs clearance, supply safety datasheets, and assign localized technician support for high-power system commissioning.
           </p>
-          <a
-            href="https://variabledcpowersupply.com/800v-dc-power-supplies"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-extrabold uppercase text-xs tracking-wider rounded-lg transition-all shadow-lg shadow-yellow-500/15 hover:scale-[1.02] shrink-0 text-center"
+          <button
+            type="button"
+            onClick={() => { window.location.href = "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-extrabold uppercase text-xs tracking-wider rounded-lg transition-all shadow-lg shadow-yellow-500/15 hover:scale-[1.02] shrink-0 text-center cursor-pointer"
           >
             Buy 800V DC Power Supply Online ↗
-          </a>
+          </button>
         </div>
       </section>
 
@@ -75,7 +71,7 @@ export default function WhereToBuyView() {
                     <a
                       href="https://variabledcpowersupply.com"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       className="text-yellow-500 hover:text-yellow-400 underline transition-colors"
                     >
                       variabledcpowersupply.com ↗

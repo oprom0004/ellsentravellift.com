@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
 import { HelpCircle, ChevronDown, ChevronUp, ShieldCheck, Cpu, Globe, Mail, Clock } from "lucide-react";
 
@@ -63,7 +65,7 @@ export default function AboutEtmView() {
             About eTommens Co.
           </h2>
           <p className="text-xs text-gray-400 leading-relaxed text-justify font-sans">
-            Founded under a commitment to precise, rugged, and stable electrical instrumentation, eTommens Corporation has evolved into a key manufacturer of professional laboratory variable DC power supplies, load simulators, and automated test equipment (ATE).
+            Founded under a commitment to precise, rugged, and stable electrical instrumentation, eTommens Corporation has evolved into a key manufacturer of professional laboratory <a href="https://variabledcpowersupply.com/" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">variable DC power supply</a> models, load simulators, and automated test equipment (ATE).
           </p>
           <p className="text-xs text-gray-400 leading-relaxed text-justify font-sans">
             Our specialized ETM 800V Series addresses safety, low electromagnetic interface (EMI), and persistent long-term continuous loading limits. We supply world-class university laboratories, green aerospace developers, photovoltaic test installations, and rapid electric vehicle charging systems.

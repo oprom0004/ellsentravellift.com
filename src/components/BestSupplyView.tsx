@@ -3,16 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React from "react";
-import { AppRoute } from "../types";
+import Link from "next/link";
 import { TECHNICAL_COMPARISONS } from "../data";
-import { Award, ShieldAlert, Sparkles, AlertCircle, ArrowRight } from "lucide-react";
+import { Award, AlertCircle, ArrowRight } from "lucide-react";
 
-interface BestSupplyProps {
-  onNavigate: (route: AppRoute) => void;
-}
-
-export default function BestSupplyView({ onNavigate }: BestSupplyProps) {
+export default function BestSupplyView() {
   return (
     <div id="best-supply-view" className="space-y-10">
       {/* Editorial guide title block */}
@@ -25,7 +23,7 @@ export default function BestSupplyView({ onNavigate }: BestSupplyProps) {
           What Defines the Best 800V DC Power Supply for High Voltage R&D?
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          Selecting a high-voltage power system is a long-term commitment. Low-quality power supplies suffer from high residual AC noise ripple, long transient recovery lags that trigger protective safety shutdowns, and lack proper safety monitoring loops. This analytical guide presents standard benchmark criteria contrasting <span className="text-gray-200 font-bold">eTommens Premium High-Voltage Units</span> against generic components.
+          Selecting a high-voltage power system is a long-term commitment. Low-quality power supplies suffer from high residual AC noise ripple, long transient recovery lags that trigger protective safety shutdowns. When choosing the <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">best 800V DC power supply</a>, this analytical guide presents standard benchmark criteria contrasting <span className="text-gray-200 font-bold">eTommens Premium High-Voltage Units</span> against generic components.
         </p>
       </section>
 
@@ -96,14 +94,14 @@ export default function BestSupplyView({ onNavigate }: BestSupplyProps) {
             For pure R&D, physical material labs, and high-precision sensors, choose the <span className="text-gray-200 font-bold">eTommens eTM-8001 (1A)</span> with high resolution sensing. For EV components testing and battery charging, choose the robust active PFC high thermal density <span className="text-gray-200 font-bold">eTommens eTM-8005 (5A)</span> or <span className="text-gray-200 font-bold">eTM-8006 (6A)</span> with embedded I-V profile controllers.
           </p>
           <div className="pt-2">
-            <button
+            <Link
               id="best-supply-navigate-specs"
-              onClick={() => onNavigate(AppRoute.CURRENT_SERIES)}
+              href="/1A-to-6A-800v-dc-series"
               className="text-xs text-yellow-500 font-mono flex items-center gap-1 hover:text-yellow-400 cursor-pointer"
             >
               Examine model spectrum (1A to 6A)
               <ArrowRight size={13} />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

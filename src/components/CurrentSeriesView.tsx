@@ -3,16 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import React, { useState } from "react";
+import Link from "next/link";
 import { POWER_MODELS } from "../data";
-import { AppRoute } from "../types";
-import { Sliders, Check, Cpu, Zap, Activity } from "lucide-react";
+import { Activity } from "lucide-react";
 
-interface CurrentSeriesProps {
-  onNavigate: (route: AppRoute) => void;
-}
-
-export default function CurrentSeriesView({ onNavigate }: CurrentSeriesProps) {
+export default function CurrentSeriesView() {
   const [activeAmperage, setActiveAmperage] = useState<number>(5);
 
   const matched = POWER_MODELS.find(m => m.current === activeAmperage) || POWER_MODELS[3];
@@ -81,7 +79,7 @@ export default function CurrentSeriesView({ onNavigate }: CurrentSeriesProps) {
           800V DC Power Supply Current Ratings: 1A, 2A, 3A, 5A to 6A
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed max-w-4xl">
-          Varying current thresholds require different gauge conductor windings, thermal management designs, and input AC grid phases. The <span className="text-yellow-500 font-semibold">eTommens eTM series</span> categorizes key currents into standard 19-inch rack enclosures. Adjust the slider or pick an amperage level to review custom design profiles.
+          Varying current thresholds require different gauge conductor windings, thermal management designs, and input AC grid phases. The eTommens eTM series categorizes key <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply current ratings</a> range from 1A, 2A, 3A, 5A to 6A to fit standard 19-inch rack enclosures. Adjust the slider or pick an amperage level to review custom design profiles.
         </p>
       </section>
 
@@ -190,29 +188,76 @@ export default function CurrentSeriesView({ onNavigate }: CurrentSeriesProps) {
               The eTM constant-current technology maintains nominal current safety margin up to the maximum 800V voltage, yielding a true constant power operation range.
             </p>
           </div>
-
-          <div className="pt-4 border-t border-gray-800 flex justify-between gap-3 flex-wrap">
-            <div className="flex gap-2">
-              <a
-                href={matched.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-2.5 px-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-950 font-extrabold text-xs uppercase rounded-lg transition-all duration-200 flex items-center gap-1 hover:scale-[1.02] select-none cursor-pointer inline-flex"
-              >
-                🛒 Buy {matched.id} Online ↗
-              </a>
-            </div>
-            <button
-              id="amp-compare-budget"
-              onClick={() => onNavigate(AppRoute.BEST_SUPPLY)}
-              className="py-2 px-4 bg-transparent hover:bg-gray-800/40 text-gray-400 hover:text-white rounded-lg text-xs transition border border-gray-800 cursor-pointer font-semibold"
-            >
-              Compare Reliability
-            </button>
-          </div>
         </div>
 
       </section>
+
+      {/* Complete 800V DC Series Model Lineup Directory */}
+      <section id="all-models-directory" className="space-y-6 pt-8 border-t border-gray-800">
+        <div>
+          <h3 className="text-lg font-sans font-bold text-gray-200 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+            800V DC Power Supply Complete Specifications Matrix
+          </h3>
+          <p className="text-xs text-gray-400 mt-1 max-w-4xl">
+            Compare technical parameters, interface characteristics, and direct purchase channels across all 10 standard and C-series models. All documentation links refer to official product entries.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto border border-gray-800 rounded-xl bg-[#121214]">
+          <table className="w-full border-collapse text-left text-xs font-sans">
+            <thead>
+              <tr className="border-b border-gray-800 bg-gray-900/50 text-[10px] uppercase tracking-wider text-gray-450 font-mono">
+                <th className="p-4 font-semibold">Model SKU</th>
+                <th className="p-4 font-semibold">Rated Output</th>
+                <th className="p-4 font-semibold">Peak Power</th>
+                <th className="p-4 font-semibold">Interface Control Type</th>
+                <th className="p-4 font-semibold text-right">Unit Price</th>
+                <th className="p-4 font-semibold text-center">Documentation</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-800/60 text-gray-300">
+              {POWER_MODELS.map(m => {
+                const isCModel = m.id.endsWith("C");
+                return (
+                  <tr key={m.id} className="hover:bg-gray-800/10 transition-colors">
+                    <td className="p-4 font-mono font-bold">
+                      <span className="text-yellow-500">{m.id}</span>
+                      <span className={`ml-2 text-[9px] px-1.5 py-0.5 rounded font-mono ${
+                        isCModel 
+                          ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" 
+                          : "bg-gray-800 text-gray-400"
+                      }`}>
+                        {isCModel ? "C-Series" : "Standard"}
+                      </span>
+                    </td>
+                    <td className="p-4 font-mono">800V / {m.current}A</td>
+                    <td className="p-4 font-mono">{m.power} Watts</td>
+                    <td className="p-4 text-gray-400">
+                      {isCModel 
+                        ? "2-Knob control (independent Output Switch, 5 protections)" 
+                        : "4-Knob control (dedicated Coarse/Fine adjustments)"
+                      }
+                    </td>
+                    <td className="p-4 font-mono text-right font-bold text-gray-200">${m.basePrice} USD</td>
+                    <td className="p-4 text-center">
+                      <a
+                        href={m.buyUrl}
+                        target="_blank"
+                        rel="noopener"
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-yellow-500 hover:text-yellow-400 underline decoration-yellow-500/20 hover:decoration-yellow-400/50 transition-colors whitespace-nowrap"
+                      >
+                        View {m.id} Spec ↗
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -3,14 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
-import { AppRoute } from "../types";
-import { POWER_MODELS } from "../data";
-import { ShoppingCart, Check, ShieldAlert, Globe, ExternalLink, RefreshCw, FileText, Store } from "lucide-react";
+"use client";
 
-interface BuyOnlineProps {
-  onNavigate: (route: AppRoute) => void;
-}
+import React, { useState } from "react";
+import { POWER_MODELS } from "../data";
+import { ShieldAlert, Globe, Store } from "lucide-react";
 
 // Mock of realistic inventory data across key regional warehouse hubs
 const REGIONAL_INVENTORY = [
@@ -24,12 +21,30 @@ const REGIONAL_INVENTORY = [
     }
   },
   {
+    modelId: "eTM-8001C",
+    stocks: {
+      domestic: { status: "In Stock", qty: 12 },
+      usa: { status: "In Stock", qty: 4 },
+      europe: { status: "Low Stock", qty: 2 },
+      singapore: { status: "In Stock", qty: 6 }
+    }
+  },
+  {
     modelId: "eTM-8002",
     stocks: {
       domestic: { status: "In Stock", qty: 18 },
       usa: { status: "In Stock", qty: 11 },
       europe: { status: "In Stock", qty: 7 },
       singapore: { status: "In Stock", qty: 12 }
+    }
+  },
+  {
+    modelId: "eTM-8002C",
+    stocks: {
+      domestic: { status: "In Stock", qty: 9 },
+      usa: { status: "In Stock", qty: 5 },
+      europe: { status: "Low Stock", qty: 1 },
+      singapore: { status: "In Stock", qty: 8 }
     }
   },
   {
@@ -42,12 +57,30 @@ const REGIONAL_INVENTORY = [
     }
   },
   {
+    modelId: "eTM-8003C",
+    stocks: {
+      domestic: { status: "In Stock", qty: 8 },
+      usa: { status: "Low Stock", qty: 1 },
+      europe: { status: "Backorder", qty: 0, leadTime: "3 Weeks" },
+      singapore: { status: "In Stock", qty: 4 }
+    }
+  },
+  {
     modelId: "eTM-8005",
     stocks: {
       domestic: { status: "In Stock", qty: 32 },
       usa: { status: "In Stock", qty: 14 },
       europe: { status: "In Stock", qty: 9 },
       singapore: { status: "In Stock", qty: 22 }
+    }
+  },
+  {
+    modelId: "eTM-8005C",
+    stocks: {
+      domestic: { status: "In Stock", qty: 15 },
+      usa: { status: "In Stock", qty: 7 },
+      europe: { status: "Low Stock", qty: 2 },
+      singapore: { status: "In Stock", qty: 10 }
     }
   },
   {
@@ -58,10 +91,19 @@ const REGIONAL_INVENTORY = [
       europe: { status: "Low Stock", qty: 2 },
       singapore: { status: "Low Stock", qty: 3 }
     }
+  },
+  {
+    modelId: "eTM-8006C",
+    stocks: {
+      domestic: { status: "In Stock", qty: 5 },
+      usa: { status: "Backorder", qty: 0, leadTime: "4 Weeks" },
+      europe: { status: "Low Stock", qty: 1 },
+      singapore: { status: "Low Stock", qty: 2 }
+    }
   }
 ];
 
-export default function BuyOnlineView({ onNavigate }: BuyOnlineProps) {
+export default function BuyOnlineView() {
   const [selectedRegion, setSelectedRegion] = useState<"all" | "usa" | "europe" | "singapore" | "domestic">("all");
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -112,17 +154,16 @@ export default function BuyOnlineView({ onNavigate }: BuyOnlineProps) {
           Global Warehouse Stock & Pricing Portal
         </h1>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-2 pb-6 border-b border-gray-800">
-          <p className="text-gray-400 text-sm leading-relaxed max-w-2xl text-justify">
-            We provide access to real factory warehouse stock statuses and direct purchase channels for our eTommens 800V Programmable DC Power Supplies. Select your model to purchase or checkout securely on our official online store. All orders are protected by a manufacturer warranty.
+          <p className="text-gray-400 text-sm leading-relaxed max-w-2xl text-justify font-sans">
+            We provide access to real factory warehouse stock statuses and direct purchase channels. When you are looking to buy an <a href="https://variabledcpowersupply.com/800v-dc-power-supplies" target="_blank" rel="noopener" className="text-yellow-500 hover:text-yellow-400 underline font-semibold transition-colors">800V DC power supply online</a>, our official online store supports credit cards and bank wires. Select your model to purchase or checkout securely on our official online store. All orders are protected by a manufacturer warranty.
           </p>
-          <a
-            href="https://variabledcpowersupply.com/800v-dc-power-supplies"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => { window.location.href = "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-extrabold uppercase text-xs tracking-wider rounded-lg transition-all shadow-lg shadow-yellow-500/15 hover:scale-[1.02] shrink-0 text-center"
           >
             Buy 800V DC Power Supply Online ↗
-          </a>
+          </button>
         </div>
       </section>
 
@@ -157,14 +198,13 @@ export default function BuyOnlineView({ onNavigate }: BuyOnlineProps) {
           </div>
 
           <div className="pt-2 max-w-sm">
-            <a
-              href="https://variabledcpowersupply.com/800v-dc-power-supplies"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => { window.location.href = "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
               className="w-full text-center py-2.5 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold rounded-lg text-xs tracking-wider uppercase transition flex items-center justify-center gap-1.5 select-none shadow-lg shadow-yellow-500/5 hover:scale-[1.01] cursor-pointer"
             >
               Visit E-Commerce Store Checkout ↗
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -284,14 +324,13 @@ export default function BuyOnlineView({ onNavigate }: BuyOnlineProps) {
 
                      <td className="py-4 px-4 text-right">
                       <div className="flex justify-end">
-                        <a 
-                          href={m.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies"}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button 
+                          type="button"
+                          onClick={() => { window.location.href = m.buyUrl || "https://variabledcpowersupply.com/800v-dc-power-supplies"; }}
                           className="px-2.5 py-1 text-[10px] font-extrabold bg-yellow-500 hover:bg-yellow-400 text-gray-950 uppercase rounded flex items-center gap-0.5 border border-yellow-500/20 select-none font-sans cursor-pointer inline-flex items-center hover:scale-105 active:scale-95 transition"
                         >
                           Checkout Store ↗
-                        </a>
+                        </button>
                       </div>
                     </td>
                   </tr>
